@@ -2,6 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ActiveDebugProfile>https</ActiveDebugProfile>
-    <NameOfLastUsedPublishProfile>D:\AN3-Facultate\CarRent\.github\workflows\CarRent20250402141826.yml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>D:\AN3-Facultate\CarRent\.github\workflows\ci.yml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
