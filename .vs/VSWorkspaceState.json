@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CarRent",
+    "\\CarRent\\Controllers",
+    "\\CarRent\\Models",
+    "\\CarRent\\wwwroot",
+    "\\CarRent\\wwwroot\\css"
   ],
+  "SelectedNode": "\\CarRent\\wwwroot\\css\\site.css",
   "PreviewInSolutionExplorer": false
 }
