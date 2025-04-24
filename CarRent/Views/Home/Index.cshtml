@@ -2,7 +2,55 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="main-content">
-    <h1 class="display-4">Car Rent App By Iliuta Andrei and Gugila Alex</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center">
+    <h1 class="display-4">Bine ați venit!</h1>
+    <p>Începeți căutarea mașinii perfecte pentru închiriere:</p>
+
+    <form method="get" action="/cars/search">
+        <div class="form-group">
+            <label for="make">Marcă:</label>
+            <input type="text" class="form-control" id="make" name="make">
+        </div>
+        <div class="form-group">
+            <label for="model">Model:</label>
+            <input type="text" class="form-control" id="model" name="model">
+        </div>
+        <div class="form-group">
+            <label for="year">An:</label>
+            <input type="number" class="form-control" id="year" name="year">
+        </div>
+        <div class="form-group">
+            <label for="fuelType">Tip combustibil:</label>
+            <select class="form-control" id="fuelType" name="fuelType">
+                <option value="">Toate</option>
+                @foreach (var fuel in Html.GetEnumSelectList<FuelType>())
+                {
+                    <option value="@fuel.Value">@fuel.Text</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="transmissionType">Transmisie:</label>
+            <select class="form-control" id="transmissionType" name="transmissionType">
+                <option value="">Toate</option>
+                @foreach (var transmission in Html.GetEnumSelectList<TransmissionType>())
+                {
+                    <option value="@transmission.Value">@transmission.Text</option>
+                }
+            </select>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="isAvailable" name="isAvailable" value="true">
+            <label class="form-check-label" for="isAvailable">Doar mașini disponibile</label>
+        </div>
+        <div class="form-group">
+            <label for="minPrice">Preț minim:</label>
+            <input type="number" class="form-control" id="minPrice" name="minPrice" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="maxPrice">Preț maxim:</label>
+            <input type="number" class="form-control" id="maxPrice" name="maxPrice" step="0.01">
+        </div>
+        <button type="submit" class="btn btn-primary">Caută</button>
+    </form>
 </div>
