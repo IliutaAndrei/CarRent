@@ -1,4 +1,4 @@
-﻿namespace CarRent.Interfaces
+﻿namespace CarRent.Services.Interfaces
 {
     public interface ICarService
     {

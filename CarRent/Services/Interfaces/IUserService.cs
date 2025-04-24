@@ -1,4 +1,4 @@
-﻿namespace CarRentAPI.Interfaces
+﻿namespace CarRent.Services.Interfaces
 {
     public interface IUserService
     {
