@@ -1,4 +1,6 @@
 using CarRent.Data;
+using CarRent.Services.Interfaces;
+using CarRent.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<CarRentContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ICarService, CarService>();
 
 
 var app = builder.Build();
