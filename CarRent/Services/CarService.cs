@@ -52,8 +52,8 @@ namespace CarRent.Services
     string make,
     string model,
     int? year,
-    string fuelType, // Acum primim string din formular
-    string transmissionType, // Acum primim string din formular
+    string fuelType, 
+    string transmissionType, 
     bool? isAvailable,
     decimal? minPrice,
     decimal? maxPrice)
@@ -81,7 +81,7 @@ namespace CarRent.Services
                 {
                     query = query.Where(c => c.FuelType == parsedFuelType);
                 }
-                // Dacă nu se poate parsa, ignorăm filtrul pentru FuelType
+                
             }
 
             if (!string.IsNullOrEmpty(transmissionType))
@@ -90,7 +90,7 @@ namespace CarRent.Services
                 {
                     query = query.Where(c => c.TransmissionType == parsedTransmissionType);
                 }
-                // Dacă nu se poate parsa, ignorăm filtrul pentru TransmissionType
+                
             }
 
             if (isAvailable.HasValue)
