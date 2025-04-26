@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CarRent.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateTables : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,38 +16,38 @@ namespace CarRent.Migrations
                 name: "Cars",
                 columns: table => new
                 {
-                    CarID = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Make = table.Column<string>(type: "text", nullable: false),
                     Model = table.Column<string>(type: "text", nullable: false),
                     YearOfFabrication = table.Column<int>(type: "integer", nullable: false),
-                    FuelType = table.Column<string>(type: "text", nullable: false),
-                    TransimissionType = table.Column<string>(type: "text", nullable: false),
+                    FuelType = table.Column<int>(type: "integer", nullable: false),
+                    TransmissionType = table.Column<int>(type: "integer", nullable: false),
                     IsAvailable = table.Column<bool>(type: "boolean", nullable: false),
                     PricePerDay = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cars", x => x.CarID);
-                });
+                    table.PrimaryKey("PK_Cars", x => x.Id);
+            });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FirstName = table.Column<string>(type: "text", nullable: false),
-                    LastName = table.Column<string>(type: "text", nullable: false),
-                    UserName = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
-                });
+             name: "Users",
+             columns: table => new
+             {
+                 UserId = table.Column<int>(type: "integer")
+                     .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                 FirstName = table.Column<string>(type: "text", nullable: false),
+                 LastName = table.Column<string>(type: "text", nullable: false),
+                 UserName = table.Column<string>(type: "text", nullable: false),
+                 Email = table.Column<string>(type: "text", nullable: false),
+                 PhoneNumber = table.Column<string>(type: "text", nullable: false),
+                 Password = table.Column<string>(type: "text", nullable: false)
+             },
+             constraints: table =>
+             {
+                 table.PrimaryKey("PK_Users", x => x.UserId);
+             });
 
             migrationBuilder.CreateTable(
                 name: "Admins",
@@ -102,7 +102,7 @@ namespace CarRent.Migrations
                         name: "FK_Orders_Cars_CarID",
                         column: x => x.CarID,
                         principalTable: "Cars",
-                        principalColumn: "CarID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_Customers_CustomerID",

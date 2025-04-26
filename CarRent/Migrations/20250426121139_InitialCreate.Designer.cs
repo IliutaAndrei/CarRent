@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CarRent.Migrations
 {
     [DbContext(typeof(CarRentContext))]
-    [Migration("20250409110415_test")]
-    partial class test
+    [Migration("20250426121139_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,15 +27,14 @@ namespace CarRent.Migrations
 
             modelBuilder.Entity("CarRent.Models.Car", b =>
                 {
-                    b.Property<int>("CarID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CarID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("FuelType")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("FuelType")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("boolean");
@@ -51,14 +50,13 @@ namespace CarRent.Migrations
                     b.Property<decimal>("PricePerDay")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("TransimissionType")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("TransmissionType")
+                        .HasColumnType("integer");
 
                     b.Property<int>("YearOfFabrication")
                         .HasColumnType("integer");
 
-                    b.HasKey("CarID");
+                    b.HasKey("Id");
 
                     b.ToTable("Cars");
                 });
