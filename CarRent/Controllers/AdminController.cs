@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarRent.Controllers
 {
-    [Route("adminpanel")]
     public class AdminController : Controller
     {
         private readonly ICarService _carService;
@@ -14,19 +13,19 @@ namespace CarRent.Controllers
             _carService = carService;
         }
 
-        [HttpGet("")] 
+        [HttpGet] 
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpGet("cars/add")] 
+        [HttpGet] 
         public IActionResult AddCar()
         {
             return View();
         }
 
-        [HttpPost("cars/add")] 
+        [HttpPost] 
         public async Task<IActionResult> AddCar(Car car)
         {
             if (ModelState.IsValid)

@@ -109,11 +109,28 @@ footer {
         font-size: 14px;
     }
 
-.main-content {
-    height: 800px;
-    padding-top: 300px;
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 60px;
+    height: auto;
 }
 
+.main-content {
+    height: auto;
+}
+
+    .main-content h1 {
+        text-align: center;
+    }
+
+    .main-content button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
 a {
-    color: gray !important
+    color: gray !important;
 }

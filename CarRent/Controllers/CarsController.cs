@@ -13,7 +13,7 @@ namespace CarRent.Controllers
             _carService = carService;
         }
 
-        [HttpGet("/cars/search")]
+        [HttpGet]
         public async Task<IActionResult> Search(
             string make,
             string model,
