@@ -6,13 +6,6 @@
 
 <p>Bine ați venit în panoul de administrare al aplicației CarRent.</p>
 
-<p>
-    <a asp-action="AddCar" class="btn btn-primary">Adaugă o Mașină Nouă</a>
-</p>
-
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
-    </div>
-}
+<ul>
+    <li><a href="/adminpanel/cars/add">Adaugă o Mașină Nouă</a></li>
+</ul>
