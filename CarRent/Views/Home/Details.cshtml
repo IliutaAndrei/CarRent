@@ -1,0 +1,60 @@
+﻿@model CarRent.Models.Car
+
+@{
+    ViewData["Title"] = "Detalii Mașină";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>Mașină</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Make)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Make)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.YearOfFabrication)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.YearOfFabrication)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FuelType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FuelType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TransmissionType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TransmissionType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsAvailable)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PricePerDay)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PricePerDay)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Înapoi la listă</a> |
+    <a asp-action="Rent" asp-route-id="@Model.Id">Închiriază</a>
+</div>
