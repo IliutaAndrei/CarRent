@@ -25,14 +25,17 @@ namespace CarRent.Controllers
             return View();
         }
 
-        [HttpPost] 
+        [HttpPost]
         public async Task<IActionResult> AddCar(Car car)
         {
             if (ModelState.IsValid)
             {
                 await _carService.AddCarAsync(car);
-                return RedirectToAction("Index");
+                TempData["SuccessMessage"] = "Mașina a fost adăugată cu succes!";
+                return RedirectToAction("Index"); 
             }
+
+            TempData["ErrorMessage"] = "Au existat erori la adăugarea mașinii. Vă rugăm să verificați formularul.";
             return View(car);
         }
     }
