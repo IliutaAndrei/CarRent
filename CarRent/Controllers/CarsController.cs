@@ -18,8 +18,8 @@ namespace CarRent.Controllers
             string make,
             string model,
             int? year,
-            FuelType? fuelType, 
-            TransmissionType? transmissionType, 
+            FuelType? fuelType,
+            TransmissionType? transmissionType,
             bool? isAvailable,
             decimal? minPrice,
             decimal? maxPrice)
@@ -28,18 +28,18 @@ namespace CarRent.Controllers
                 make,
                 model,
                 year,
-                fuelType?.ToString(), 
-                transmissionType?.ToString(), 
+                fuelType?.ToString(),
+                transmissionType?.ToString(),
                 isAvailable,
                 minPrice,
                 maxPrice);
 
-            return View(searchResults);
+            return View("SearchResults", searchResults); 
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(); 
         }
     }
 }

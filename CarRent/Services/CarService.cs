@@ -61,8 +61,8 @@ namespace CarRent.Services
     string make,
     string model,
     int? year,
-    string fuelType, 
-    string transmissionType, 
+    string fuelType,
+    string transmissionType,
     bool? isAvailable,
     decimal? minPrice,
     decimal? maxPrice)
@@ -81,40 +81,38 @@ namespace CarRent.Services
 
             if (year.HasValue)
             {
-                query = query.Where(c => c.YearOfFabrication == year.Value);
+                query = query.Where(c => c.YearOfFabrication == year);
             }
 
-            if (!string.IsNullOrEmpty(fuelType))
+            if (!string.IsNullOrEmpty(fuelType) && fuelType.ToLower() != "toate")
             {
-                if (Enum.TryParse<FuelType>(fuelType, true, out var parsedFuelType))
+                if (Enum.TryParse<FuelType>(fuelType, out var parsedFuelType))
                 {
                     query = query.Where(c => c.FuelType == parsedFuelType);
                 }
-                
             }
 
-            if (!string.IsNullOrEmpty(transmissionType))
+            if (!string.IsNullOrEmpty(transmissionType) && transmissionType.ToLower() != "toate")
             {
-                if (Enum.TryParse<TransmissionType>(transmissionType, true, out var parsedTransmissionType))
+                if (Enum.TryParse<TransmissionType>(transmissionType, out var parsedTransmissionType))
                 {
                     query = query.Where(c => c.TransmissionType == parsedTransmissionType);
                 }
-                
             }
 
             if (isAvailable.HasValue)
             {
-                query = query.Where(c => c.IsAvailable == isAvailable.Value);
+                query = query.Where(c => c.IsAvailable == isAvailable);
             }
 
             if (minPrice.HasValue)
             {
-                query = query.Where(c => c.PricePerDay >= minPrice.Value);
+                query = query.Where(c => c.PricePerDay >= minPrice);
             }
 
             if (maxPrice.HasValue)
             {
-                query = query.Where(c => c.PricePerDay <= maxPrice.Value);
+                query = query.Where(c => c.PricePerDay <= maxPrice);
             }
 
             return await query.ToListAsync();
