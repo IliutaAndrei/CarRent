@@ -1,11 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Panou de Administrare";
+    ViewData["Title"] = "Panoul de Administrare";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<p>Bine ați venit în panoul de administrare al aplicației CarRent.</p>
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+}
 
-<ul>
-    <li><a href="/adminpanel/cars/add">Adaugă o Mașină Nouă</a></li>
-</ul>
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
+
+<p>Bine ați venit în panoul de administrare!</p>
+
+<div>
+    <a asp-action="AddCar" class="btn btn-primary">Adaugă Mașină Nouă</a>
+</div>

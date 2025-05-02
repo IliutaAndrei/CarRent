@@ -13,25 +13,35 @@ namespace CarRent.Controllers
             _carService = carService;
         }
 
-        [HttpGet] 
+        [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+            ViewBag.ErrorMessage = TempData["ErrorMessage"];
             return View();
         }
 
-        [HttpGet] 
+        [HttpGet]
         public IActionResult AddCar()
         {
             return View();
         }
 
-        [HttpPost] 
+        [HttpPost]
         public async Task<IActionResult> AddCar(Car car)
         {
             if (ModelState.IsValid)
             {
-                await _carService.AddCarAsync(car);
-                return RedirectToAction("Index");
+                bool isAdded = await _carService.AddCarAsync(car);
+                if (isAdded)
+                {
+                    TempData["SuccessMessage"] = "Mașina a fost adăugată cu succes!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "A apărut o eroare la adăugarea mașinii.";
+                }
             }
             return View(car);
         }
