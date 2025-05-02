@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositories\**" />
     <Compile Remove="wwwroot\css\NewFolder\**" />
+    <Content Remove="Repositories\**" />
     <Content Remove="wwwroot\css\NewFolder\**" />
+    <EmbeddedResource Remove="Repositories\**" />
     <EmbeddedResource Remove="wwwroot\css\NewFolder\**" />
+    <None Remove="Repositories\**" />
     <None Remove="wwwroot\css\NewFolder\**" />
   </ItemGroup>
 
@@ -21,10 +25,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
