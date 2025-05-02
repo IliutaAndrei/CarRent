@@ -6,7 +6,7 @@ namespace CarRent.Services.Interfaces
     {
         Task<Car> GetCarByIdAsync(int id);
         Task<List<Car>> GetAllCarsAsync();
-        Task AddCarAsync(Car car);
+        Task<bool> AddCarAsync(Car car);
         Task UpdateCarAsync(Car car);
         Task DeleteCarAsync(int id);
 

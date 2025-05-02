@@ -26,10 +26,19 @@ namespace CarRent.Services
             return await _context.Cars.ToListAsync();
         }
 
-        public async Task AddCarAsync(Car car)
+        public async Task<bool> AddCarAsync(Car car)
         {
-            _context.Cars.Add(car);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Cars.Add(car);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                
+                return false; 
+            }
         }
 
         public async Task UpdateCarAsync(Car car)
