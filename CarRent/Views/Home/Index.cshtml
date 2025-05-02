@@ -114,14 +114,14 @@
 
 @section Scripts {
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+                    document.addEventListener('DOMContentLoaded', function () {
             const showAllCarsBtn = document.getElementById('showAllCarsBtn');
             const allCarsDiv = document.getElementById('allCars');
 
             if (showAllCarsBtn && allCarsDiv) {
                 showAllCarsBtn.addEventListener('click', function () {
                     allCarsDiv.style.display = 'flex';
-                    showAllCarsBtn.style.display = 'none'; 
+                    showAllCarsBtn.style.display = 'none';
                 });
             }
         });
