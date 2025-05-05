@@ -14,7 +14,10 @@ namespace CarRent.Services
             _context = context;
         }
 
-
+        public async Task<int> CountAllCarsAsync()
+        {
+            return await _context.Cars.CountAsync();
+        }
 
         public async Task<Car> GetCarByIdAsync(int id)
         {
