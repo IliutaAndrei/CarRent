@@ -34,12 +34,37 @@ namespace CarRent.Controllers
                 minPrice,
                 maxPrice);
 
-            return View("SearchResults", searchResults); 
+            return View("SearchResults", searchResults);
         }
 
         public IActionResult Index()
         {
-            return View(); 
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+            ViewBag.ErrorMessage = TempData["ErrorMessage"];
+            return View();
+        }
+        public IActionResult AddCar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCar(Car car)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isAdded = await _carService.AddCarAsync(car);
+                if (isAdded)
+                {
+                    TempData["SuccessMessage"] = "Mașina a fost adăugată cu succes!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "A apărut o eroare la adăugarea mașinii.";
+                }
+            }
+            return View(car);
         }
     }
 }
