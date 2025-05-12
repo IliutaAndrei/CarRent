@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - CarRent</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    @*  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
+    @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
     <link rel="stylesheet" href="~/CarRent.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <link rel="icon" type="image/x-icon" href="/src/favicon.png">
@@ -21,17 +21,33 @@
 </head>
 <body>
     <header>
-        <div class="header-left-side">
-            <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/media/logo.png" id="logo1"></a>
-        </div>
-        <div class="header-right-side">
-            <button class="header-buttons"><a class="a-button" asp-area="" asp-controller="Admin" asp-action="AddCar">Adauga</a></button>
-            <span id="span1" style="margin-left: 5px; margin-right: 5px; color: rgb(116, 116, 116)">|</span>
-            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" class="svgAuth"><path d="M833 450H719A271 271 0 0 0 512 0a273 273 0 0 0-207 450H195L47 598v426h930V598L833 450zM368 170h288a177 177 0 1 1-288 0zm192 375h233l89 92v292H142V637l92-92h230z"></path></svg>
-            <button class="header-buttons"><a href="signin.html" class="a-button">Autentifica-te</a></button>
-            <span id="span1" style="margin-left: 5px; color: rgb(116, 116, 116)">|</span>
-            <button class="header-buttons"><a href="signup.html" class="a-button">Inregistreaza-te</a></button>
-        </div>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">I&G Rentals</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AddCar">Adaugă</a>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
     </header>
     <div class="page-content">
         <main role="main" class="pb-3">
@@ -43,22 +59,16 @@
         <div class="footer-left">
             <h4>I&G Rentals</h4>
             <a href="">Informatii Ordin 225/2023</a>
-            <a href="">Blog</a>
             <a href="">Ajutor</a>
             <a href="">Politica de cookies</a>
             <a href="">Politica de confidentialitate</a>
             <a href="">Regulament persoane fizice</a>
-            <a href="">Regulament profesionisti</a>
         </div>
         <div class="footer-center">
             <h4>I&G Rentals</h4>
             <a href="">Autoturisme</a>
-            <a href="">Agro</a>
-            <a href="">Autotutilitare</a>
             <a href="">Camioane</a>
-            <a href="">Constructii</a>
             <a href="">Motociclete</a>
-            <a href="">Piese</a>
             <a href="">Remorci</a>
         </div>
 
