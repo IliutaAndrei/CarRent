@@ -39,8 +39,8 @@ namespace CarRent.Services
             }
             catch (Exception)
             {
-                
-                return false; 
+
+                return false;
             }
         }
 
@@ -55,21 +55,21 @@ namespace CarRent.Services
             var car = await _context.Cars.FindAsync(id);
             if (car == null)
             {
-                
-                return false; // Indicate failure
+
+                return false; 
             }
 
             _context.Cars.Remove(car);
             try
             {
                 await _context.SaveChangesAsync();
-                
-                return true; // Indicate success
+
+                return true; 
             }
             catch (DbUpdateException ex)
             {
-                
-                return false; // Indicate failure
+
+                return false; 
             }
         }
 
@@ -132,6 +132,32 @@ namespace CarRent.Services
             }
 
             return await query.ToListAsync();
+        }
+
+        public async Task<bool> RentCarAsync(int id)
+        {
+            var car = await _context.Cars.FindAsync(id);
+            if (car == null)
+            {
+                return false;
+            }
+
+            if (!car.IsAvailable)
+            {
+                return false;
+            }
+
+            car.IsAvailable = false;
+            _context.Cars.Update(car);
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
         }
     }
 }

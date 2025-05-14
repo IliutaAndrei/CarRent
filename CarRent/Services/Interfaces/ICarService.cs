@@ -9,8 +9,9 @@ namespace CarRent.Services.Interfaces
         Task<bool> AddCarAsync(Car car);
         Task UpdateCarAsync(Car car);
         Task<bool> DeleteCarAsync(int id);
+        Task<bool> RentCarAsync(int id);
 
-        
+
         Task<List<Car>> SearchCarsAsync(
             string make,
             string model,
