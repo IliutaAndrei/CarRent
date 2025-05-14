@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarRent.Data
 {
-    public class CarRentContext : IdentityDbContext<IdentityUser>
+    public class CarRentContext : IdentityDbContext
     {
         public CarRentContext(DbContextOptions<CarRentContext> options) : base(options)
         {

@@ -50,13 +50,26 @@ namespace CarRent.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteCarAsync(int id)
+        public async Task<bool> DeleteCarAsync(int id)
         {
             var car = await _context.Cars.FindAsync(id);
-            if (car != null)
+            if (car == null)
             {
-                _context.Cars.Remove(car);
+                
+                return false; // Indicate failure
+            }
+
+            _context.Cars.Remove(car);
+            try
+            {
                 await _context.SaveChangesAsync();
+                
+                return true; // Indicate success
+            }
+            catch (DbUpdateException ex)
+            {
+                
+                return false; // Indicate failure
             }
         }
 
