@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using CarRent.Models;
 using CarRent.Data;
 using Microsoft.EntityFrameworkCore;
+using CarRent.Services.Interfaces;
+using CarRent.Services;
 
 namespace CarRent.Controllers;
 
@@ -10,16 +12,21 @@ public class HomeController : Controller
 {
     private readonly CarRentContext _context; // Folose?te CarRentContext (sau numele contextului t?u)
     private readonly ILogger<HomeController> _logger;
+    private readonly ICarService _carService;
 
-    public HomeController(CarRentContext context, ILogger<HomeController> logger)
+    public HomeController(CarRentContext context, ILogger<HomeController> logger, ICarService carService)
     {
         _context = context;
         _logger = logger;
+        _carService = carService;
     }
 
     public async Task<IActionResult> Index()
     {
         var allCars = await _context.Cars.ToListAsync();
+        var carCount = await _carService.CountAllCarsAsync();
+
+        ViewBag.TotalCarCount = carCount;
         return View(allCars);
     }
 

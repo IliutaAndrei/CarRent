@@ -20,5 +20,7 @@ namespace CarRent.Services.Interfaces
             bool? isAvailable,
             decimal? minPrice,
             decimal? maxPrice);
+
+        Task<int> CountAllCarsAsync();
     }
 }
