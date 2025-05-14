@@ -58,14 +58,14 @@ namespace CarRent.Services
         }
 
         public async Task<List<Car>> SearchCarsAsync(
-    string make,
-    string model,
-    int? year,
-    string fuelType,
-    string transmissionType,
-    bool? isAvailable,
-    decimal? minPrice,
-    decimal? maxPrice)
+            string make,
+            string model,
+            int? year,
+            string fuelType,
+            string transmissionType,
+            bool? isAvailable,
+            decimal? minPrice,
+            decimal? maxPrice)
         {
             IQueryable<Car> query = _context.Cars;
 
