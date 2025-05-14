@@ -13,20 +13,20 @@ public static class RoleInitializer
         {
             var services = scope.ServiceProvider;
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>(); // Folosește ApplicationUser
+            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
             var logger = services.GetRequiredService<ILogger<Program>>();
 
-            // Asigură-te că rolul "Admin" există.
+            
             if (!await roleManager.RoleExistsAsync("Admin"))
             {
-                // Dacă rolul nu există, îl creăm.
+                
                 var adminRole = new IdentityRole { Name = "Admin" };
                 var result = await roleManager.CreateAsync(adminRole);
                 if (!result.Succeeded)
                 {
-                    // Log eroare: Important să logăm erorile pentru a depana.
+                    
                     logger.LogError("Eroare la crearea rolului Admin: {Errors}", string.Join(", ", result.Errors));
-                    return; // Oprim execuția dacă nu putem crea rolul.
+                    return;
                 }
                 else
                 {
@@ -38,18 +38,18 @@ public static class RoleInitializer
                 logger.LogInformation("Rolul Admin există deja.");
             }
 
-            // Caută utilizatorul "admin" după adresa de email.
+            
             var adminUser = await userManager.FindByEmailAsync("admin@example.com");
             if (adminUser != null)
             {
-                // Verifică dacă utilizatorul are deja rolul "Admin".
+                
                 if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
                 {
-                    // Dacă utilizatorul nu are rolul, îl adăugăm.
+                    
                     var result = await userManager.AddToRoleAsync(adminUser, "Admin");
                     if (!result.Succeeded)
                     {
-                        // Log eroare: Important să logăm erorile pentru a depana.
+                        
                         logger.LogError("Eroare la adăugarea rolului 'Admin' utilizatorului admin: {Errors}", string.Join(", ", result.Errors));
                     }
                     else
