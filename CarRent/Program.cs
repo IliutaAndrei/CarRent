@@ -31,7 +31,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 builder.Services.AddDbContext<CarRentContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<ICarService, ICarService >();
 builder.Services.AddScoped<IBookingService, BookingService>();
 
 var app = builder.Build();

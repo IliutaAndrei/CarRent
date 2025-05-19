@@ -16,7 +16,7 @@ namespace CarRent.Services
             _context = context;
         }
 
-        public async Task<Order> GetBookingByIdAsync(int id)
+        public async Task<Order?> GetBookingByIdAsync(int id)
         {
             return await _context.Orders.FindAsync(id);
         }

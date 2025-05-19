@@ -10,7 +10,7 @@ namespace CarRent.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly CarRentContext _context; // Folose?te CarRentContext (sau numele contextului t?u)
+    private readonly CarRentContext _context; 
     private readonly ILogger<HomeController> _logger;
     private readonly ICarService _carService;
 

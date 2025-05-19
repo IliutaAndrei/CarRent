@@ -19,33 +19,63 @@ namespace CarRent.Controllers
             string make,
             string model,
             int? year,
-            FuelType? fuelType,
-            TransmissionType? transmissionType,
+            string fuelType,
+            string transmissionType,
             bool? isAvailable,
             decimal? minPrice,
             decimal? maxPrice)
         {
+
+            FuelType? parsedFuelTypeNullable = null;
+            if (!string.IsNullOrEmpty(fuelType) && !fuelType.Equals("toate", StringComparison.OrdinalIgnoreCase))
+            {
+                if (Enum.TryParse<FuelType>(fuelType, true, out FuelType parsedFuelType))
+                {
+                    parsedFuelTypeNullable = parsedFuelType;
+                }
+                Console.WriteLine($"Controller - Parsed Fuel Type: {parsedFuelTypeNullable}");
+            }
+            else
+            {
+                Console.WriteLine($"Controller - Fuel Type: {fuelType}");
+            }
+
+        
+            TransmissionType? parsedTransmissionTypeNullable = null;
+            if (!string.IsNullOrEmpty(transmissionType) && !transmissionType.Equals("toate", StringComparison.OrdinalIgnoreCase))
+            {
+                if (Enum.TryParse<TransmissionType>(transmissionType, true, out TransmissionType parsedTransmissionType))
+                {
+                    parsedTransmissionTypeNullable = parsedTransmissionType;
+                }
+                Console.WriteLine($"Controller - Parsed Transmission Type: {parsedTransmissionTypeNullable}");
+            }
+            else
+            {
+                Console.WriteLine($"Controller - Transmission Type: {transmissionType}");
+            }
+
             var searchResults = await _carService.SearchCarsAsync(
                 make,
                 model,
                 year,
-                fuelType?.ToString(),
-                transmissionType?.ToString(),
+                parsedFuelTypeNullable,
+                parsedTransmissionTypeNullable,
                 isAvailable,
                 minPrice,
                 maxPrice);
 
-            return View("SearchResults", searchResults);
+            return View("Views/Home/SearchResults.cshtml", searchResults);
         }
 
         public async Task<IActionResult> Index()
         {
             ViewBag.SuccessMessage = TempData["SuccessMessage"];
             ViewBag.ErrorMessage = TempData["ErrorMessage"];
-            var cars = await _carService.GetAllCarsAsync(); 
-            return View(cars); 
-            //return View();
+            var cars = await _carService.GetAllCarsAsync();
+            return View(cars);
         }
+
         public IActionResult AddCar()
         {
             return View();
@@ -58,7 +88,7 @@ namespace CarRent.Controllers
             {
                 return NotFound();
             }
-            return View(car); 
+            return View(car);
         }
 
         [HttpPost]
@@ -92,7 +122,7 @@ namespace CarRent.Controllers
             if (!car.IsAvailable)
             {
                 TempData["ErrorMessage"] = "Mașina selectată nu este disponibilă pentru închiriere.";
-                return RedirectToAction(nameof(Details), new { id = id }); // Redirecționează către Details
+                return RedirectToAction(nameof(Details), new { id = id });
             }
             return View(car);
         }
@@ -119,7 +149,7 @@ namespace CarRent.Controllers
             if (rented)
             {
                 TempData["SuccessMessage"] = "Mașina a fost închiriată cu succes!";
-                return RedirectToAction(nameof(Details), new { id = id }); // Redirecționăm către Details
+                return RedirectToAction(nameof(Details), new { id = id });
             }
             else
             {
@@ -127,11 +157,5 @@ namespace CarRent.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-
-        //public IActionResult Details(int id)
-        //{
-        //    var car = _carService.GetCarByIdAsync(id).Result;
-        //    return View(car);
-        //}
     }
 }

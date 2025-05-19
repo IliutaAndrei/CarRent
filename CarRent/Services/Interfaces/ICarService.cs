@@ -4,7 +4,7 @@ namespace CarRent.Services.Interfaces
 {
     public interface ICarService
     {
-        Task<Car> GetCarByIdAsync(int id);
+        Task<Car?> GetCarByIdAsync(int id);
         Task<List<Car>> GetAllCarsAsync();
         Task<bool> AddCarAsync(Car car);
         Task UpdateCarAsync(Car car);
@@ -16,8 +16,8 @@ namespace CarRent.Services.Interfaces
             string make,
             string model,
             int? year,
-            string fuelType,
-            string transmissionType,
+            FuelType? fuelType, 
+            TransmissionType? transmissionType, 
             bool? isAvailable,
             decimal? minPrice,
             decimal? maxPrice);

@@ -55,7 +55,7 @@ namespace CarRent.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("CarRent.Models.Order", b =>
@@ -82,7 +82,7 @@ namespace CarRent.Migrations
 
                     b.HasIndex("CarID");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

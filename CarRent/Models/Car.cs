@@ -14,6 +14,7 @@ public class Car
     [Display(Name = "Model")]
     public string Model { get; set; }
 
+    [Required(ErrorMessage = "Anul Fabricației este obligatoriu.")]
     [Display(Name = "Anul Fabricației")]
     public int YearOfFabrication { get; set; }
 

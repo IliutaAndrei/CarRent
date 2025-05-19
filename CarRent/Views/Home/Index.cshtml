@@ -10,7 +10,7 @@
         <h4>Total mașini înregistrate: @ViewBag.TotalCarCount</h4>
   
 
-        <form method="get" action="/Cars/Search" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+        <form method="get" asp-controller="Cars" asp-action="Search" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
             <div class="form-group" style="flex: 1;">
                 <label for="make" style="display: block; margin-bottom: 5px; color: #333;">Marcă:</label>
                 <input type="text" class="form-control" id="make" name="make" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
-using CarRent.Models; // Asigură-te că ai namespace-ul corect
+using CarRent.Models; 
 using Microsoft.Extensions.Logging;
 
 public static class RoleInitializer

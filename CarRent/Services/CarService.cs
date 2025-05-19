@@ -19,9 +19,14 @@ namespace CarRent.Services
             return await _context.Cars.CountAsync();
         }
 
-        public async Task<Car> GetCarByIdAsync(int id)
+        public async Task<Car?> GetCarByIdAsync(int id)
         {
-            return await _context.Cars.FindAsync(id);
+            var car = await _context.Cars.FindAsync(id);
+            if (car == null)
+            {
+                throw new InvalidOperationException($"Mașina cu ID-ul {id} nu a fost găsită.");
+            }
+            return car;
         }
 
         public async Task<List<Car>> GetAllCarsAsync()
@@ -39,7 +44,6 @@ namespace CarRent.Services
             }
             catch (Exception)
             {
-
                 return false;
             }
         }
@@ -55,21 +59,18 @@ namespace CarRent.Services
             var car = await _context.Cars.FindAsync(id);
             if (car == null)
             {
-
-                return false; 
+                return false;
             }
 
             _context.Cars.Remove(car);
             try
             {
                 await _context.SaveChangesAsync();
-
-                return true; 
+                return true;
             }
             catch (DbUpdateException ex)
             {
-
-                return false; 
+                return false;
             }
         }
 
@@ -77,16 +78,21 @@ namespace CarRent.Services
             string make,
             string model,
             int? year,
-            string fuelType,
-            string transmissionType,
+            FuelType? fuelType,
+            TransmissionType? transmissionType,
             bool? isAvailable,
             decimal? minPrice,
             decimal? maxPrice)
         {
+            // Adaugă acest log pentru a verifica valorile primite
+            Console.WriteLine($"Service - SearchCarsAsync: make = {make}, model = {model}, fuelType = {fuelType}, transmissionType = {transmissionType}");
+
+            // Folosim IQueryable pentru eficiență - conversia la SQL se va face la final
             IQueryable<Car> query = _context.Cars;
 
             if (!string.IsNullOrEmpty(make))
             {
+                // Folosim expresia SQL directă pentru PostgreSQL case insensitive
                 query = query.Where(c => c.Make.ToLower().Contains(make.ToLower()));
             }
 
@@ -100,20 +106,14 @@ namespace CarRent.Services
                 query = query.Where(c => c.YearOfFabrication == year);
             }
 
-            if (!string.IsNullOrEmpty(fuelType) && fuelType.ToLower() != "toate")
+            if (fuelType.HasValue)
             {
-                if (Enum.TryParse<FuelType>(fuelType, out var parsedFuelType))
-                {
-                    query = query.Where(c => c.FuelType == parsedFuelType);
-                }
+                query = query.Where(c => c.FuelType == fuelType.Value);
             }
 
-            if (!string.IsNullOrEmpty(transmissionType) && transmissionType.ToLower() != "toate")
+            if (transmissionType.HasValue)
             {
-                if (Enum.TryParse<TransmissionType>(transmissionType, out var parsedTransmissionType))
-                {
-                    query = query.Where(c => c.TransmissionType == parsedTransmissionType);
-                }
+                query = query.Where(c => c.TransmissionType == transmissionType.Value);
             }
 
             if (isAvailable.HasValue)
@@ -131,6 +131,7 @@ namespace CarRent.Services
                 query = query.Where(c => c.PricePerDay <= maxPrice);
             }
 
+            // Executăm query-ul la final, după ce am construit toate condițiile
             return await query.ToListAsync();
         }
 
